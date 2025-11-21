@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Theoretical Report — Ethernet & Networking</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --accent:#0a4c8b;
+      --muted:#808590;
+      --maxw:1000px;
+      --mono: "Courier New", monospace;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{
+      background: linear-gradient(90deg, rgba(10,76,139,1) 0%, rgba(6,128,180,1) 100%);
+      color:white;
+      padding:2.25rem 1rem;
+      text-align:center;
+    }
+    header h1{margin:0;font-size:1.6rem;letter-spacing:0.2px}
+    header p{margin:6px 0 0;opacity:0.95}
+    main{
+      max-width:var(--maxw);
+      margin:1.5rem auto;
+      padding:1.75rem;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow: 0 8px 30px rgba(15,23,42,0.06);
+    }
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem}
+    h2{
+      color:var(--accent);
+      border-left:4px solid var(--accent);
+      padding-left:12px;
+      margin-top:1.25rem;
+      margin-bottom:0.5rem;
+      font-size:1.05rem;
+    }
+    p{margin:0.5rem 0;line-height:1.55}
+    ul{margin:0.5rem 0 0 1.15rem}
+    code, kbd{font-family:var(--mono);background:#eef6ff;padding:2px 6px;border-radius:6px}
+    .section-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,252,255,0.96));
+      padding:1rem;
+      border-radius:8px;
+      margin-top:0.85rem;
+      border:1px solid rgba(10,76,139,0.06);
+    }
+    .small{font-size:0.95rem;color:var(--muted)}
+    footer{max-width:var(--maxw);margin:1rem auto 2rem;text-align:center;color:var(--muted);font-size:0.92rem}
+
+    @media (max-width:640px){
+      header h1{font-size:1.25rem}
+      main{padding:1rem;margin:0.8rem}
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        }
+
+        thead {
+        background-color: #0a4c8b;
+        color: white;
+        }
+
+        th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+        }
+
+        tbody tr:nth-child(even) {
+        background-color: #f4f7fb;
+        }
+
+  </style>
+</head>
+<body>
+
+
+  <header>
+    <h1>Theoretical Report — Ethernet & Networking Basics</h1>
+  </header>
+
+  <main>
+
+    <section class="section-card" id="s1-1">
+      <h2>1.1 Ethernet standards for physical layer, Ethernet limits, Ethernet frame</h2>
+
+      <p><strong>Ethernet physical-layer standards.</strong> Ethernet specifies how bits are represented and carried over a chosen medium. Common media include twisted-pair copper (Cat5e/Cat6/Cat6a/etc.), coaxial cable (legacy), and optical fiber. /p>
+
+      <table class="table table-bordered text-center mt-2">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>IEEE documentation</th>
+                    <th>Standard</th>
+                    <th>Medium</th>
+                    <th>Speed</th>
+                    <th>Distance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td rowspan="3" class="align-middle">Ethernet</td>
+                    <td>802.3a</td>
+                    <td>10 Base2</td>
+                    <td rowspan="2" class="align-middle">Coxial</td>
+                    <td rowspan="3" class="align-middle">10 Mbps</td>
+                    <td>200 meters</td>
+                  </tr>
+                  <tr>
+                    <td>802.3</td>
+                    <td>10 Base5</td>
+                    <td>500 meters</td>
+                  </tr>
+                  <tr>
+                    <td>802.3i</td>
+                    <td>10 BaseT</td>
+                    <td>UTP</td>
+                    <td>100 meters</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3" class="align-middle">Fast Ethernet</td>
+                    <td rowspan="3" class="align-middle">802.3u</td>
+                    <td>100 BaseTx</td>
+                    <td>UTP</td>
+                    <td rowspan="3" class="align-middle">100 Mbps</td>
+                    <td>100m</td>
+                  </tr>
+                  <tr>
+                    <td>100 BaseFx</td>
+                    <td>MMF</td>
+                    <td>2km</td>
+                  </tr>
+                  <tr>
+                    <td>100 BaseFx</td>
+                    <td>SMF</td>
+                    <td>20km</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="5" class="align-middle">Gigabit Ethernet</td>
+                    <td rowspan="5" class="align-middle">802.3z</td>
+                    <td>1000 Base T</td>
+                    <td>UTP</td>
+                    <td rowspan="5" class="align-middle">1 Gbps</td>
+                    <td>100m</td>
+                  </tr>
+                  <tr>
+                    <td>1000 Base SX</td>
+                    <td rowspan="2" class="align-middle">MMF</td>
+                    <td>275m</td>
+                  </tr>
+                  <tr>
+                    <td>1000 Base LX</td>
+                    <td>512m</td>
+                  </tr>
+                  <tr>
+                    <td>1000 Base LX</td>
+                    <td rowspan="2" class="align-middle">SMF</td>
+                    <td>20km</td>
+                  </tr>
+                  <tr>
+                    <td>1000 Base SH</td>
+                    <td>80km</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2" class="align-middle">10 Gig Ethernet</td>
+                    <td rowspan="2" class="align-middle">IEEE 802.3ae</td>
+                    <td>10GBase-ER</td>
+                    <td rowspan="2" class="align-middle">SMF</td>
+                    <td rowspan="2" class="align-middle">10 Gbps</td>
+                    <td>10km</td>
+                  </tr>
+                  <tr>
+                    <td>10GBase-LR</td>
+                    <td>40km</td>
+                  </tr>
+                </tbody>
+     </table>
+     <p><strong>Ethernet limits.</strong> Physical constraints come from the medium and the standard: maximum link distance (which varies by cable/fiber type), attenuation and crosstalk constraints, and practical throughput limits determined by cable quality, electromagnetic interference, and hardware capabilities. In legacy shared-medium topologies, timing constraints also determined maximum network diameter for reliable collision detection.</p> <p><strong>Ethernet frame structure.</strong> The basic Ethernet frame contains a preamble (for synchronization), destination and source MAC addresses (each 6 bytes), an EtherType or length field, the payload (user data) and the Frame Check Sequence (FCS — typically a 4-byte CRC for error detection). Typical payload sizes range from a minimum of 46 bytes (padding applied if needed) to a maximum of 1500 bytes for standard MTU; larger frames (jumbo frames) are possible on some networks.</p>
+     <img src="https://sierrahardwaredesign.com/wp-content/uploads/2024/03/IEEE-802_3_Basic-Frame-e1710385812738-1024x442.png" alt="Ethernet frame structure" style="max-width:600px; display:block; margin:20px auto;">
+    </section>
+
+    <section class="section-card" id="s1-2">
+      <h2>1.2 MAC address, broadcasting</h2>
+
+      <p><strong>MAC address.</strong> A Media Access Control (MAC) address is a 48-bit hardware identifier burned into or assigned to a network interface. It is usually shown as twelve hexadecimal digits grouped in pairs (e.g. <code>00:1A:2B:3C:4D:5E</code>). The first 24 bits (the OUI — Organizationally Unique Identifier) denote the vendor or manufacturer; the remaining bits identify the specific interface. MACs are used for local-link delivery and switching decisions within a LAN.</p>
+
+      <p><strong>Broadcasting.</strong> Broadcasting is the mechanism of sending a single frame that every device on the local link will receive. Ethernet uses the special broadcast MAC address <code>FF:FF:FF:FF:FF:FF</code>. Broadcasts are useful for discovery protocols (like ARP requests) but should be limited because they are delivered to all hosts and can increase load on large networks.</p>
+    </section>
+
+    <section class="section-card" id="s1-3">
+      <h2>1.3 The difference between hub, switch and router</h2>
+
+      <p><strong>Hub.</strong> A hub is the simplest network device and functions at OSI Layer 1 (physical layer). It repeats electrical signals received on one port to every other port, creating a single shared collision domain. Hubs do not inspect frames or implement any addressing logic; they simply broadcast the raw signal.</p>
+
+      <p><strong>Switch.</strong> A switch operates primarily at OSI Layer 2 (data-link layer). It learns which MAC addresses are reachable through which physical ports, stores that information in a MAC table (CAM table), and forwards frames only to the port associated with the destination MAC. This selective forwarding reduces unnecessary traffic and collisions compared to hubs. Advanced switches can operate at higher layers and provide features such as VLANs, QoS, and ACLs.</p>
+
+      <p><strong>Router.</strong> Routers work at OSI Layer 3 (network layer) and forward packets between distinct IP networks. They make forwarding decisions based on IP addresses and maintain routing tables (static or dynamic). Routers enable inter-network communication, provide path selection, and often include services such as NAT, firewalling, and DHCP relay.</p>
+        <img src="https://i.ytimg.com/vi/QRWMviYyWV8/maxresdefault.jpg" alt="Example Image" style="max-width:600px; display:block; margin:20px auto;">
+
+    </section>
+
+    <section class="section-card" id="s1-4">
+      <h2>1.4 CSMA/CD, collision, half and full duplex</h2>
+
+      <p><strong>CSMA/CD.</strong> Carrier Sense Multiple Access with Collision Detection (CSMA/CD) is the access method originally used in Ethernet shared-media environments. Before transmitting, a station listens to the medium (carrier sense). If the medium is idle, the station transmits. If two stations transmit simultaneously, a collision occurs; both transmitters detect the collision (collision detection), abort their transmissions, and schedule retransmission after a randomized backoff interval.</p>
+
+      <p><strong>Collision.</strong> A collision is when overlapping transmissions interfere with each other on a shared medium, corrupting the frames. Collisions are inherent to half-duplex shared-medium topologies and are managed by CSMA/CD. In modern switched full-duplex links collisions are effectively eliminated.</p>
+
+      <p><strong>Half-duplex vs Full-duplex.</strong> In half-duplex mode a port can either send or receive at any moment — devices contend for the medium and collisions can happen. In full-duplex mode, send and receive are independent (typically using separate wire pairs), allowing simultaneous bidirectional traffic and removing the need for CSMA/CD.</p>
+         <img src="https://www.blackbox.co.uk/_AppData/cms/Default%20pages/TechInfo/BBE/BBE_Simplex%20vs%20Duplex_Transmissions.png" alt="Simplex vs Duplex Fiber Cable" style="max-width:600px; display:block; margin:20px auto;">
+    </section>
+
+    <section class="section-card" id="s1-5">
+      <h2>1.5 ARP request, detecting doubled IP address</h2>
+
+      <p><strong>ARP (Address Resolution Protocol) request.</strong> ARP is the protocol that resolves IPv4 addresses to MAC addresses on a local network. When a host needs the MAC for a given IPv4 address, it broadcasts an ARP request asking “Who has X.X.X.X? Tell Y.Y.Y.Y” (Y.Y.Y.Y is the sender’s IP). The host that owns that IP responds with an ARP reply containing its MAC, allowing the requester to populate its ARP cache and send the frame to the correct link-layer address.</p>
+
+      <p><strong>Detecting duplicate (doubled) IP addresses.</strong> Duplicate IP addresses occur when two devices are configured with the same IPv4 address on the same network, producing conflicts. Detection methods include:</p>
+      <ul>
+        <li>Observing inconsistent or rapidly changing ARP cache entries for the same IP (different MACs seen).</li>
+        <li>Seeing multiple responses to pings for the same IP (more than one device replies).</li>
+        <li>Using a <em>gratuitous ARP</em> on boot: a host announces its own IP-to-MAC mapping; if another host already uses that IP, it may respond or other hosts may notice conflicting entries.</li>
+        <li>Network scanning and monitoring tools (arp-scan, nmap, centralized IPAM/DHCP logs) which can flag duplicate assignments.</li>
+      </ul>
+    </section>
+
+    <section class="section-card" id="s1-6">
+      <h2>1.6 BOOTP, DHCP</h2>
+
+      <p><strong>BOOTP (Bootstrap Protocol).</strong> BOOTP was an early protocol to provide basic network configuration to diskless workstations and other clients. BOOTP servers typically store static mappings between client MAC addresses and assigned IP addresses (and possibly boot filenames). A BOOTP client broadcasts a request and the server replies with configuration information based on preconfigured entries. Because of its static nature, BOOTP is less flexible for dynamic environments.</p>
+
+      <p><strong>DHCP (Dynamic Host Configuration Protocol).</strong> DHCP is an extension and superset of BOOTP that adds dynamic address allocation and a richer set of configuration options. DHCP servers assign addresses from pools with lease durations, provide gateway and DNS information, and support automated reallocation and renewal (DORA: Discover → Offer → Request → Acknowledge). DHCP can also be relayed across networks via DHCP relay agents, allowing centralized address management.</p>
+    </section>
+
+    <section class="section-card" id="s1-7">
+      <h2>1.7 VLANs</h2>
+
+      <p><strong>What are VLANs?</strong> Virtual LANs (VLANs) let administrators partition a single physical switch fabric into multiple logical broadcast domains. Each VLAN groups a set of ports (or tagged frames) so devices within the same VLAN communicate as if they were on the same LAN, while broadcasts are contained within that VLAN.</p>
+
+      <p><strong>Benefits.</strong> VLANs reduce broadcast traffic scope, improve security by isolating groups of hosts, and provide flexibility in network design — for example grouping users by department regardless of physical location.</p>
+
+      <p><strong>Types & tagging.</strong> VLANs can be implemented as port-based (ports assigned to a VLAN) or tag-based using the IEEE 802.1Q standard. 802.1Q inserts a 4-byte tag into Ethernet frames containing priority and a VLAN identifier, enabling multiple VLANs to share a single trunk link between switches. Service provider networks may use Q-in-Q (stacked tags) to encapsulate customer VLANs inside provider VLANs.</p>
+
+      <p><strong>Inter-VLAN communication.</strong> Traffic between VLANs requires routing (inter-VLAN routing) performed by a router or Layer-3 switch. This allows administrators to enforce policies and access control between logical networks.</p>
+    </section>
+
+
+    
+   
+
+      <section class="section-card" id="p2-1">
+        <h2>2.1 Finding MAC address using ipconfig, MAC address of default gateway using Wireshark</h2>
+        <p>Finding MAC Address and Default Gateway MAC</p>
+        <p>Using the command “ipconfig /all”, the MAC address of the local network adapter was identified.</p>
+        <img src="1.png" style="max-width:600px; display:block; margin:20px auto;">
+        <p>Wireshark was then used to capture ARP traffic, and the ARP replies were analyzed to determine the MAC address of the default gateway.</p>
+        <img src="2.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+      <section class="section-card" id="p2-2">
+        <h2>2.2 Find the producer of network adapter</h2>
+        <p>Identifying the Producer of the Network Adapter</p>
+        <p>The manufacturer of the network interface card was determined through the adapter properties in the operating system (MAC address).</p>
+        <img src="3.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+      <section class="section-card" id="p2-3">
+        <h2>2.3 Flush ARP cache</h2>
+        <p>The ARP cache was cleared using the appropriate system command. This ensured that all subsequent ARP entries were newly generated by actual network communication.</p>
+        <img src="4.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+      <section class="section-card" id="p2-4">
+        <h2>2.4 Set the same IP address on two different hosts in the lab and detect it using arp request</h2>
+        <p>Setting the Same IP Address on Two Hosts and Detecting Conflict</p>
+        <p>Two hosts were configured to use the same IPv4 address. </p>
+        <img src="5.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+      <section class="section-card" id="p2-5">
+        <h2>2.5 Using Wireshark save the packets required to obtain IP address through DHCP</h2>
+        <p>Capturing DHCP Packets in Wireshark</p>
+        <p>Wireshark was used to capture DHCP traffic during the IP assignment process. The DHCP Discover, Offer, Request, and Acknowledgment messages were saved for analysis.</p>
+        <img src="6.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+      <section class="section-card" id="p2-6">
+        <h2>2.6 Release and renew IP address using ipconfig</h2>
+        <p>Releasing and Renewing IP Address</p>
+        <p>The IP address on one of the hosts was released and renewed using the system command. This triggered DHCP communication, confirming proper address allocation.</p>
+        <img src="7.png" style="max-width:600px; display:block; margin:20px auto;">
+        <img src="8.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+      <section class="section-card" id="p2-7">
+        <h2>2.7 Change MAC address of a computer in the lab to the same as the MAC address of the other computer in the lab and verify IP address obtained</h2>
+        <p>Changing MAC Address and Verifying New IP</p>
+        <p>The MAC address of one computer was modified to match the MAC address of another lab computer. After changing the MAC address, the IP address was renewed, and the result was verified to confirm how DHCP assigned an address based on the altered MAC identity.</p>
+        <img src="9.png" style="max-width:600px; display:block; margin:20px auto;">
+      </section>
+
+
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </main>
+
+  <footer>
+    <p>Done by Ivan Bolbas 258581 and Oleh Chaikovskyi 258584</p>
+  </footer>
+</body>
+</html>
